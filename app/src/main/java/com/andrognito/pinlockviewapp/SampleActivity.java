@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.view.View;
 import android.view.View.*;
+import android.widget.Toast;
 
 import com.andrognito.pinlockview.IndicatorDots;
 import com.andrognito.pinlockview.PinLockListener;
@@ -27,6 +28,7 @@ public class SampleActivity extends AppCompatActivity {
         @Override
         public void onComplete(String pin) {
             Log.d(TAG, "Pin complete: " + pin);
+            Toast.makeText(SampleActivity.this, "Pin complete", Toast.LENGTH_SHORT).show();
         }
 
         @Override

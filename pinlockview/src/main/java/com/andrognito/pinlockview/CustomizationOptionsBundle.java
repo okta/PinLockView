@@ -1,6 +1,10 @@
 package com.andrognito.pinlockview;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * The customization options for the buttons in {@link PinLockView}
@@ -9,7 +13,6 @@ import android.graphics.drawable.Drawable;
  * Created by aritraroy on 01/06/16.
  */
 public class CustomizationOptionsBundle {
-
     private int numberTextColor;
     private int lettersTextColor;
     private int deleteButtonColor;
@@ -32,6 +35,10 @@ public class CustomizationOptionsBundle {
     private boolean showEnterButton;
     private int pinLength;
     private boolean swapEnterDeleteButtons;
+
+    private int enterButtonColor;
+    private int enterButtonDisabledColor;
+    private int enterButtonPressesColor;
 
     public CustomizationOptionsBundle() {
     }
@@ -187,6 +194,30 @@ public class CustomizationOptionsBundle {
 
     public void setShowEnterButton(boolean showEnterButton) {
         this.showEnterButton = showEnterButton;
+    }
+
+    public int getEnterButtonColor() {
+        return this.enterButtonColor;
+    }
+
+    public void setEnterButtonColor(int enterButtonColor) {
+        this.enterButtonColor = enterButtonColor;
+    }
+
+    public int getEnterButtonDisabledColor() {
+        return this.enterButtonDisabledColor;
+    }
+
+    public void setEnterButtonDisabledColor(int enterButtonDisabledColor) {
+        this.enterButtonDisabledColor = enterButtonDisabledColor;
+    }
+
+    public int getEnterButtonPressesColor() {
+        return this.enterButtonPressesColor;
+    }
+
+    public void setEnterButtonPressesColor(int enterButtonPressesColor) {
+        this.enterButtonPressesColor = enterButtonPressesColor;
     }
 
     public int getPinLength() {

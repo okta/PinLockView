@@ -1,16 +1,21 @@
 package com.andrognito.pinlockview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.nfc.Tag;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -213,26 +218,26 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private void configureEnterButtonHolder(EnterViewHolder holder) {
         if (holder != null) {
-            if (mCustomizationOptionsBundle.isShowEnterButton() && mPinLength >= mCustomizationOptionsBundle.getPinLength()) {
-                holder.mEnterButton.setVisibility(View.VISIBLE);
+            if (mCustomizationOptionsBundle.isShowEnterButton()) {
+                // Set Enable of Enter Button
+                if (mPinLength >= mCustomizationOptionsBundle.getPinLength()) {
+                    holder.mEnterButton.setEnabled(true);
+                    holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                            PorterDuff.Mode.SRC_ATOP);
+                } else {
+                    holder.mEnterButton.setEnabled(false);
+                    holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonDisabledColor(),
+                            PorterDuff.Mode.SRC_ATOP);
+                }
 
-                if (mCustomizationOptionsBundle != null) {
-                    holder.mEnterButton.setTextColor(mCustomizationOptionsBundle.getTextColor());
-                    if (mCustomizationOptionsBundle.getButtonBackgroundDrawable() != null) {
-                        if (Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                            holder.mEnterButton.setBackgroundDrawable(
-                                    mCustomizationOptionsBundle.getButtonBackgroundDrawable());
-                        } else {
-                            holder.mEnterButton.setBackground(
-                                    mCustomizationOptionsBundle.getButtonBackgroundDrawable());
-                        }
-                    }
-                    holder.mEnterButton.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                            mCustomizationOptionsBundle.getTextSize());
+                // Set Visibility of Enter Button
+                if (holder.mEnterButton.getVisibility() != View.VISIBLE) {
+                    holder.mEnterButton.setVisibility(View.VISIBLE);
                 }
             } else {
                 holder.mEnterButton.setVisibility(View.GONE);
             }
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     mCustomizationOptionsBundle.getButtonSize(),
                     mCustomizationOptionsBundle.getButtonSize());
@@ -357,6 +362,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         LinearLayout mDeleteButton;
         ImageView mButtonImage;
 
+        @SuppressLint("ClickableViewAccessibility")
         public DeleteViewHolder(final View itemView) {
             super(itemView);
             mDeleteButton = (LinearLayout) itemView.findViewById(R.id.button);
@@ -400,18 +406,20 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                                     PorterDuff.Mode.SRC_ATOP);
                             }
                         }
-                        if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                            if (!rect.contains(v.getLeft() + (int) event.getX(),
-                                    v.getTop() + (int) event.getY())) {
-                                if (mCustomizationOptionsBundle.getDeleteButtonDefault()) {
-                                    mButtonImage.clearColorFilter();
-                                } else {
-                                    mButtonImage.setColorFilter(mCustomizationOptionsBundle.getDeleteButtonColor(),
-                                        PorterDuff.Mode.SRC_ATOP);
-                                }
+                        if (leftButtonArea(v, event)) {
+                            if (mCustomizationOptionsBundle.getDeleteButtonDefault()) {
+                                mButtonImage.clearColorFilter();
+                            } else {
+                                mButtonImage.setColorFilter(mCustomizationOptionsBundle.getDeleteButtonColor(),
+                                    PorterDuff.Mode.SRC_ATOP);
                             }
                         }
                         return false;
+                    }
+
+                    private boolean leftButtonArea(View v, MotionEvent event) {
+                        return rect != null && !rect.contains(v.getLeft() + (int) event.getX(),
+                                v.getTop() + (int) event.getY());
                     }
                 });
             }
@@ -419,19 +427,50 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public class EnterViewHolder extends RecyclerView.ViewHolder {
-        Button mEnterButton;
+        ImageButton mEnterButton;
 
+        @SuppressLint("ClickableViewAccessibility")
         public EnterViewHolder(final View itemView) {
             super(itemView);
-            mEnterButton = (Button) itemView.findViewById(R.id.button);
-            mEnterButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mOnEnterClickListener != null) {
-                        mOnEnterClickListener.onEnterClicked();
+            mEnterButton = (ImageButton) itemView.findViewById(R.id.button);
+
+            if (mCustomizationOptionsBundle.isShowEnterButton()) {
+                mEnterButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mOnEnterClickListener != null) {
+                            mOnEnterClickListener.onEnterClicked();
+                        }
                     }
-                }
-            });
+                });
+
+                mEnterButton.setOnTouchListener(new View.OnTouchListener() {
+                    private Rect rect;
+
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonPressesColor(),
+                                    PorterDuff.Mode.SRC_ATOP);
+                            rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+                        }
+                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                                    PorterDuff.Mode.SRC_ATOP);
+                        }
+                        if (leftButtonArea(v, event)) {
+                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                                    PorterDuff.Mode.SRC_ATOP);
+                        }
+                        return false;
+                    }
+
+                    private boolean leftButtonArea(View v, MotionEvent event) {
+                        return rect != null && !rect.contains(v.getLeft() + (int) event.getX(),
+                                v.getTop() + (int) event.getY());
+                    }
+                });
+            }
         }
     }
 

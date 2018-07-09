@@ -25,6 +25,9 @@
 
         <attr name="keypadShowEnterButton" format="boolean" />
         <attr name="keypadSwapEnterDeleteButtons" format="boolean" />
+        <attr name="keypadEnterButtonColor" format="color" />
+        <attr name="keypadEnterButtonDisabledColor" format="color" />
+        <attr name="keypadEnterButtonPressedColor" format="color" />
 
         <attr name="dotEmptyBackground" format="reference" />
         <attr name="dotFilledBackground" format="reference" />

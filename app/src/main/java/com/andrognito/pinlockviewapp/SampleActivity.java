@@ -23,6 +23,7 @@ public class SampleActivity extends AppCompatActivity {
     private IndicatorDots mIndicatorDots;
     private ImageView logo;
     private boolean isShowing = true;
+    private boolean isEnterButtonEnabled = true;
 
     private PinLockListener mPinLockListener = new PinLockListener() {
         @Override
@@ -63,16 +64,24 @@ public class SampleActivity extends AppCompatActivity {
         mIndicatorDots.setIndicatorType(IndicatorDots.IndicatorType.FILL_WITH_ANIMATION);
 
         logo.setOnClickListener(new OnClickListener() {
-            public void onClick(View v)
-            {
-                if(isShowing) {
-                    mPinLockView.setVisibility(View.GONE);
-                    mIndicatorDots.setVisibility(View.GONE);
-                    isShowing = false;
-                } else {
-                    mPinLockView.setVisibility(View.VISIBLE);
-                    mIndicatorDots.setVisibility(View.VISIBLE);
-                    isShowing = true;
+            public void onClick(View v) {
+//                if(isShowing) {
+//                    mPinLockView.setVisibility(View.GONE);
+//                    mIndicatorDots.setVisibility(View.GONE);
+//                    isShowing = false;
+//                } else {
+//                    mPinLockView.setVisibility(View.VISIBLE);
+//                    mIndicatorDots.setVisibility(View.VISIBLE);
+//                    isShowing = true;
+//                }
+                if (isEnterButtonEnabled) {
+                    isEnterButtonEnabled = false;
+                    mPinLockView.setShowEnterButton(false);
+                    mPinLockView.setSwapEnterDeleteButtons(false);
+                } else{
+                    isEnterButtonEnabled = true;
+                    mPinLockView.setShowEnterButton(true);
+                    mPinLockView.setSwapEnterDeleteButtons(true);
                 }
             }
         });

@@ -35,6 +35,11 @@ public class PinLockView extends RecyclerView {
     private boolean mShowEnterButton;
     private boolean mSwapEnterDeleteButtons;
 
+    private boolean mEnterButtonDefault;
+    private int mEnterButtonColor;
+    private int mEnterButtonDisabledColor;
+    private int mEnterButtonPressedColor;
+
     private IndicatorDots mIndicatorDots;
     private PinLockAdapter mAdapter;
     private PinLockListener mPinLockListener;
@@ -194,6 +199,10 @@ public class PinLockView extends RecyclerView {
                 mShowDeleteButton = true;
             }
             mSwapEnterDeleteButtons = typedArray.getBoolean(R.styleable.PinLockView_keypadSwapEnterDeleteButtons, false);
+
+            mEnterButtonColor = typedArray.getColor(R.styleable.PinLockView_keypadEnterButtonColor, ResourceUtils.getColor(getContext(), R.color.white));
+            mEnterButtonDisabledColor = typedArray.getColor(R.styleable.PinLockView_keypadEnterButtonDisabledColor, ResourceUtils.getColor(getContext(), R.color.greyish));
+            mEnterButtonPressedColor = typedArray.getColor(R.styleable.PinLockView_keypadEnterButtonPressedColor, ResourceUtils.getColor(getContext(), R.color.greyish));
         } finally {
             typedArray.recycle();
         }
@@ -221,6 +230,10 @@ public class PinLockView extends RecyclerView {
         mCustomizationOptionsBundle.setShowEnterButton(mShowEnterButton);
         mCustomizationOptionsBundle.setPinLength(mPinLength);
         mCustomizationOptionsBundle.setSwapEnterDeleteButtons(mSwapEnterDeleteButtons);
+
+        mCustomizationOptionsBundle.setEnterButtonColor(mEnterButtonColor);
+        mCustomizationOptionsBundle.setEnterButtonDisabledColor(mEnterButtonDisabledColor);
+        mCustomizationOptionsBundle.setEnterButtonPressesColor(mEnterButtonPressedColor);
         initView();
     }
 
@@ -630,6 +643,28 @@ public class PinLockView extends RecyclerView {
     public void setDeleteButtonPressedColor(int deleteButtonPressedColor) {
         this.mDeleteButtonPressedColor = deleteButtonPressedColor;
         mCustomizationOptionsBundle.setDeleteButtonPressesColor(deleteButtonPressedColor);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public boolean isShowEnterButton() {
+        return mShowEnterButton;
+    }
+
+    public void setShowEnterButton(boolean showEnterButton) {
+        this.mShowEnterButton = showEnterButton;
+        mCustomizationOptionsBundle.setShowEnterButton(showEnterButton);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public boolean isSwapEnterDeleteButtons() {
+        return mSwapEnterDeleteButtons;
+    }
+
+    public void setSwapEnterDeleteButtons(boolean swapEnterDeleteButtons) {
+        this.mSwapEnterDeleteButtons = swapEnterDeleteButtons;
+        mCustomizationOptionsBundle.setSwapEnterDeleteButtons(swapEnterDeleteButtons);
+        mAdapter.setEnterButtonPosition(mCustomizationOptionsBundle.isSwapEnterDeleteButtons() ? 11 : 9);
+        mAdapter.setDeleteButtonPosition(mCustomizationOptionsBundle.isSwapEnterDeleteButtons() ? 9 : 11);
         mAdapter.notifyDataSetChanged();
     }
 

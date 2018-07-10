@@ -368,7 +368,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mDeleteButton = (LinearLayout) itemView.findViewById(R.id.button);
             mButtonImage = (ImageView) itemView.findViewById(R.id.buttonImage);
 
-            if (mCustomizationOptionsBundle.isShowDeleteButton() && mPinLength > 0) {
+            if (mPinLength > 0) {
                 mDeleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -434,43 +434,41 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
             mEnterButton = (ImageButton) itemView.findViewById(R.id.button);
 
-            if (mCustomizationOptionsBundle.isShowEnterButton()) {
-                mEnterButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mOnEnterClickListener != null) {
-                            mOnEnterClickListener.onEnterClicked();
-                        }
+            mEnterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnEnterClickListener != null) {
+                        mOnEnterClickListener.onEnterClicked();
                     }
-                });
+                }
+            });
 
-                mEnterButton.setOnTouchListener(new View.OnTouchListener() {
-                    private Rect rect;
+            mEnterButton.setOnTouchListener(new View.OnTouchListener() {
+                private Rect rect;
 
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonPressesColor(),
-                                    PorterDuff.Mode.SRC_ATOP);
-                            rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-                        }
-                        if (event.getAction() == MotionEvent.ACTION_UP) {
-                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
-                                    PorterDuff.Mode.SRC_ATOP);
-                        }
-                        if (leftButtonArea(v, event)) {
-                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
-                                    PorterDuff.Mode.SRC_ATOP);
-                        }
-                        return false;
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonPressesColor(),
+                                PorterDuff.Mode.SRC_ATOP);
+                        rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
                     }
-
-                    private boolean leftButtonArea(View v, MotionEvent event) {
-                        return rect != null && !rect.contains(v.getLeft() + (int) event.getX(),
-                                v.getTop() + (int) event.getY());
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                                PorterDuff.Mode.SRC_ATOP);
                     }
-                });
-            }
+                    if (leftButtonArea(v, event)) {
+                        mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                                PorterDuff.Mode.SRC_ATOP);
+                    }
+                    return false;
+                }
+
+                private boolean leftButtonArea(View v, MotionEvent event) {
+                    return rect != null && !rect.contains(v.getLeft() + (int) event.getX(),
+                            v.getTop() + (int) event.getY());
+                }
+            });
         }
     }
 

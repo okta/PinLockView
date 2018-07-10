@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.View;
 
 /**
  * Represents a numeric lock view which can used to taken numbers as input.
@@ -35,12 +36,12 @@ public class PinLockView extends RecyclerView {
     private boolean mShowEnterButton;
     private boolean mSwapEnterDeleteButtons;
 
-    private boolean mEnterButtonDefault;
     private int mEnterButtonColor;
     private int mEnterButtonDisabledColor;
     private int mEnterButtonPressedColor;
 
     private IndicatorDots mIndicatorDots;
+    private SeparateDeleteButton mSeparateDeleteButton;
     private PinLockAdapter mAdapter;
     private PinLockListener mPinLockListener;
     private CustomizationOptionsBundle mCustomizationOptionsBundle;
@@ -60,6 +61,9 @@ public class PinLockView extends RecyclerView {
                 if (mPin.length() == 1) {
                     mAdapter.setPinLength(mPin.length());
                     mAdapter.notifyItemChanged(mAdapter.getDeleteButtonPosition());
+                    if (mSeparateDeleteButton != null && mSeparateDeleteButton.isShowSeparateDeleteButton()) {
+                        mSeparateDeleteButton.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 if (mPin.length() == mPinLength) {
@@ -75,23 +79,9 @@ public class PinLockView extends RecyclerView {
                     }
                 }
             } else {
-                if (!isShowDeleteButton()) {
-                    resetPinLockView();
-                    mPin = mPin.concat(String.valueOf(keyValue));
-
-                    if (isIndicatorDotsAttached()) {
-                        mIndicatorDots.updateDot(mPin.length());
-                    }
-
-                    if (mPinLockListener != null) {
-                        mPinLockListener.onPinChange(mPin.length(), mPin);
-                    }
-
-                } else {
-                    if (mPinLockListener != null) {
-                        if (!mShowEnterButton) {
-                            mPinLockListener.onComplete(mPin);
-                        }
+                if (mPinLockListener != null) {
+                    if (!mShowEnterButton) {
+                        mPinLockListener.onComplete(mPin);
                     }
                 }
             }
@@ -112,6 +102,9 @@ public class PinLockView extends RecyclerView {
                 if (mPin.length() == 0) {
                     mAdapter.setPinLength(mPin.length());
                     mAdapter.notifyItemChanged(mAdapter.getDeleteButtonPosition());
+                    if (mSeparateDeleteButton != null) {
+                        mSeparateDeleteButton.setVisibility(View.GONE);
+                    }
                 }
 
                 if (mPin.length() == mPinLength - 1) {
@@ -623,6 +616,7 @@ public class PinLockView extends RecyclerView {
     public void setShowDeleteButton(boolean showDeleteButton) {
         this.mShowDeleteButton = showDeleteButton;
         mCustomizationOptionsBundle.setShowDeleteButton(showDeleteButton);
+        mAdapter.notifyItemChanged(mAdapter.getDeleteButtonPosition());
         mAdapter.notifyDataSetChanged();
     }
 
@@ -653,6 +647,7 @@ public class PinLockView extends RecyclerView {
     public void setShowEnterButton(boolean showEnterButton) {
         this.mShowEnterButton = showEnterButton;
         mCustomizationOptionsBundle.setShowEnterButton(showEnterButton);
+        mAdapter.notifyItemChanged(mAdapter.getEnterButtonPosition());
         mAdapter.notifyDataSetChanged();
     }
 
@@ -709,6 +704,9 @@ public class PinLockView extends RecyclerView {
         if (mIndicatorDots != null) {
             mIndicatorDots.updateDot(mPin.length());
         }
+        if (mSeparateDeleteButton != null) {
+            mSeparateDeleteButton.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -727,5 +725,19 @@ public class PinLockView extends RecyclerView {
      */
     public void attachIndicatorDots(IndicatorDots mIndicatorDots) {
         this.mIndicatorDots = mIndicatorDots;
+    }
+
+    public boolean isSeparateDeleteButtonAttached() {
+        return mSeparateDeleteButton != null;
+    }
+
+    public void attachSeparateDeleteButton(SeparateDeleteButton mSeparateDeleteButton) {
+        this.mSeparateDeleteButton = mSeparateDeleteButton;
+        this.mSeparateDeleteButton.setOnDeleteClickListener(mOnDeleteClickListener);
+        if (mPin.length() == 0) {
+            this.mSeparateDeleteButton.setVisibility(View.GONE);
+        } else {
+            this.mSeparateDeleteButton.setVisibility(View.VISIBLE);
+        }
     }
 }

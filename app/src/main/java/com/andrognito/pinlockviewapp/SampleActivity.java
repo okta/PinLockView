@@ -1,5 +1,6 @@
 package com.andrognito.pinlockviewapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.andrognito.pinlockview.IndicatorDots;
 import com.andrognito.pinlockview.PinLockListener;
 import com.andrognito.pinlockview.PinLockView;
+import com.andrognito.pinlockview.SeparateDeleteButton;
 
 public class SampleActivity extends AppCompatActivity {
 
@@ -24,6 +26,7 @@ public class SampleActivity extends AppCompatActivity {
     private ImageView logo;
     private boolean isShowing = true;
     private boolean isEnterButtonEnabled = true;
+    private SeparateDeleteButton separateDeleteButton;
 
     private PinLockListener mPinLockListener = new PinLockListener() {
         @Override
@@ -53,11 +56,18 @@ public class SampleActivity extends AppCompatActivity {
         logo = (ImageView) findViewById(R.id.profile_image);
         mPinLockView = (PinLockView) findViewById(R.id.pin_lock_view);
         mIndicatorDots = (IndicatorDots) findViewById(R.id.indicator_dots);
+        separateDeleteButton = (SeparateDeleteButton) findViewById(R.id.separate_delete_button);
+
+        separateDeleteButton.setVisibility(View.VISIBLE);
+        separateDeleteButton.setSeparateDeleteButtonColor(R.color.light_purple);
+        separateDeleteButton.setSeparateDeleteButtonPressedColor(Color.WHITE);
+        mPinLockView.attachSeparateDeleteButton(separateDeleteButton);
 
         mPinLockView.attachIndicatorDots(mIndicatorDots);
         mPinLockView.setPinLockListener(mPinLockListener);
         //mPinLockView.setCustomKeySet(new int[]{2, 3, 1, 5, 9, 6, 7, 0, 8, 4});
         //mPinLockView.enableLayoutShuffling();
+        mPinLockView.setShowDeleteButton(false);
 
         mPinLockView.setPinLength(4);
 
@@ -78,10 +88,14 @@ public class SampleActivity extends AppCompatActivity {
                     isEnterButtonEnabled = false;
                     mPinLockView.setShowEnterButton(false);
                     mPinLockView.setSwapEnterDeleteButtons(false);
+                    mPinLockView.setShowDeleteButton(true);
+                    separateDeleteButton.setShowSeparateDeleteButton(false);
                 } else{
                     isEnterButtonEnabled = true;
                     mPinLockView.setShowEnterButton(true);
                     mPinLockView.setSwapEnterDeleteButtons(true);
+                    mPinLockView.setShowDeleteButton(false);
+                    separateDeleteButton.setShowSeparateDeleteButton(true);
                 }
             }
         });

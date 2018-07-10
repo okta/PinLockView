@@ -39,6 +39,9 @@
             <enum name="fillWithAnimation" value="2" />
         </attr>
 
+        <attr name="separateDeleteButtonColor" format="color" />
+        <attr name="separateDeleteButtonPressedColor" format="color" />
+
     </declare-styleable>
 
 </resources>

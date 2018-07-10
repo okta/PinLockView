@@ -61,38 +61,25 @@ public class SampleActivity extends AppCompatActivity {
         mIndicatorDots = (IndicatorDots) findViewById(R.id.indicator_dots);
         separateDeleteButton = (SeparateDeleteButton) findViewById(R.id.separate_delete_button);
 
+        mPinLockView.setPinLockListener(mPinLockListener);
+        mPinLockView.setPinLength(4);
+        mPinLockView.setShowDeleteButton(false);
+        ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);
+
+        mPinLockView.attachInputField(mInputField);
         mInputField.setVisibility(View.VISIBLE);
+
         separateDeleteButton.setVisibility(View.VISIBLE);
         separateDeleteButton.setSeparateDeleteButtonColor(R.color.light_purple);
         separateDeleteButton.setSeparateDeleteButtonPressedColor(Color.WHITE);
         mPinLockView.attachSeparateDeleteButton(separateDeleteButton);
 
-        mPinLockView.attachInputField(mInputField);
-
         mPinLockView.attachIndicatorDots(mIndicatorDots);
-        mPinLockView.setPinLockListener(mPinLockListener);
-        //mPinLockView.setCustomKeySet(new int[]{2, 3, 1, 5, 9, 6, 7, 0, 8, 4});
-        //mPinLockView.enableLayoutShuffling();
-        mPinLockView.setShowDeleteButton(false);
         mIndicatorDots.setVisibility(View.GONE);
-
         mIndicatorDots.setIndicatorType(IndicatorDots.IndicatorType.FIXED);
-
-        mPinLockView.setPinLength(4);
-
-        ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);
 
         logo.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-//                if(isShowing) {
-//                    mPinLockView.setVisibility(View.GONE);
-//                    mIndicatorDots.setVisibility(View.GONE);
-//                    isShowing = false;
-//                } else {
-//                    mPinLockView.setVisibility(View.VISIBLE);
-//                    mIndicatorDots.setVisibility(View.VISIBLE);
-//                    isShowing = true;
-//                }
                 if (isEnterButtonEnabled) {
                     isEnterButtonEnabled = false;
                     mPinLockView.setShowEnterButton(false);

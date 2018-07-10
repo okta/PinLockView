@@ -45,13 +45,8 @@ public class SeparateDeleteButton extends AppCompatImageButton {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.PinLockView);
 
         try {
-            Log.d("SeparateDeleteButton", "Custom: " + Integer.toString(R.styleable.PinLockView_separateDeleteButtonColor));
-            Log.d("SeparateDeleteButton", "Default: " + Integer.toString(ResourceUtils.getColor(getContext(), R.color.white)));
-
             mSeparateDeleteButtonColor = typedArray.getColor(R.styleable.PinLockView_separateDeleteButtonColor, ResourceUtils.getColor(getContext(), R.color.white));
             mSeparateDeleteButtonPressedColor = typedArray.getColor(R.styleable.PinLockView_separateDeleteButtonPressedColor, ResourceUtils.getColor(getContext(), R.color.greyish));
-
-            Log.d("SeparateDeleteButton", "Actual: " + Integer.toString(mSeparateDeleteButtonColor));
         } finally {
             typedArray.recycle();
         }

@@ -15,15 +15,7 @@
         android:layout_marginTop="104dp"
         android:src="@drawable/img_no_avatar" />
 
-    <com.andrognito.pinlockview.SeparateDeleteButton
-        android:id="@+id/separate_delete_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_below="@+id/profile_name"
-        android:layout_toEndOf="@+id/indicator_dots"
-        android:layout_toRightOf="@+id/indicator_dots"
-        android:padding="16dp"
-        />
+
 
     <TextView
         android:id="@+id/profile_name"
@@ -39,6 +31,27 @@
         android:textColor="@color/white"
         android:textSize="34sp" />
 
+    <com.andrognito.pinlockview.InputField
+        android:id="@+id/input_field"
+        android:layout_width="100dp"
+        android:layout_height="64dp"
+        android:layout_below="@+id/profile_name"
+        android:gravity="center_horizontal"
+        android:fontFamily="monospace"
+        android:typeface="monospace"
+        android:textSize="27sp"
+        android:layout_centerHorizontal="true" />
+
+    <com.andrognito.pinlockview.SeparateDeleteButton
+        android:id="@+id/separate_delete_button"
+        android:layout_width="48dp"
+        android:layout_height="64dp"
+        android:layout_alignBottom="@+id/input_field"
+        android:layout_gravity="center_vertical"
+        android:layout_toRightOf="@+id/input_field"
+        android:layout_toEndOf="@+id/input_field"
+        android:padding="16dp" />
+
     <com.andrognito.pinlockview.IndicatorDots
         android:id="@+id/indicator_dots"
         android:layout_width="wrap_content"
@@ -46,21 +59,6 @@
         android:layout_below="@id/profile_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp" />
-
-    <!-- <com.andrognito.pinlockview.PinLockView
-        android:id="@+id/pin_lock_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/indicator_dots"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        app:keypadButtonSize="72dp"
-        app:keypadShowDeleteButton="true"
-        app:keypadTextColor="@color/white"
-        app:keypadUseDeprecatedColorOptions="true"
-        app:keypadDefaultDeleteColor="true"
-        app:keypadShowEnterButton="true"
-        app:keypadSwapEnterDeleteButtons="true"/> -->
 
     <com.andrognito.pinlockview.PinLockView
         android:id="@+id/pin_lock_view"
@@ -79,9 +77,9 @@
         app:keypadEnterButtonColor="@color/light_purple"
         app:keypadEnterButtonDisabledColor="@color/white"
         app:keypadEnterButtonPressedColor="@color/greyish"
-
         app:separateDeleteButtonColor="@color/colorPrimary"
         app:separateDeleteButtonPressedColor="@color/colorAccent"
+        app:indicatorType="fixed"
         />
 
 </RelativeLayout>

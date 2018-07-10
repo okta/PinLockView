@@ -10,9 +10,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.view.View;
 import android.view.View.*;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.andrognito.pinlockview.IndicatorDots;
+import com.andrognito.pinlockview.InputField;
 import com.andrognito.pinlockview.PinLockListener;
 import com.andrognito.pinlockview.PinLockView;
 import com.andrognito.pinlockview.SeparateDeleteButton;
@@ -24,7 +26,7 @@ public class SampleActivity extends AppCompatActivity {
     private PinLockView mPinLockView;
     private IndicatorDots mIndicatorDots;
     private ImageView logo;
-    private boolean isShowing = true;
+    private InputField mInputField;
     private boolean isEnterButtonEnabled = true;
     private SeparateDeleteButton separateDeleteButton;
 
@@ -55,23 +57,30 @@ public class SampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sample);
         logo = (ImageView) findViewById(R.id.profile_image);
         mPinLockView = (PinLockView) findViewById(R.id.pin_lock_view);
+        mInputField = (InputField) findViewById(R.id.input_field);
         mIndicatorDots = (IndicatorDots) findViewById(R.id.indicator_dots);
         separateDeleteButton = (SeparateDeleteButton) findViewById(R.id.separate_delete_button);
 
+        mInputField.setVisibility(View.VISIBLE);
         separateDeleteButton.setVisibility(View.VISIBLE);
         separateDeleteButton.setSeparateDeleteButtonColor(R.color.light_purple);
         separateDeleteButton.setSeparateDeleteButtonPressedColor(Color.WHITE);
         mPinLockView.attachSeparateDeleteButton(separateDeleteButton);
+
+        mPinLockView.attachInputField(mInputField);
 
         mPinLockView.attachIndicatorDots(mIndicatorDots);
         mPinLockView.setPinLockListener(mPinLockListener);
         //mPinLockView.setCustomKeySet(new int[]{2, 3, 1, 5, 9, 6, 7, 0, 8, 4});
         //mPinLockView.enableLayoutShuffling();
         mPinLockView.setShowDeleteButton(false);
+        mIndicatorDots.setVisibility(View.GONE);
+
+        mIndicatorDots.setIndicatorType(IndicatorDots.IndicatorType.FIXED);
 
         mPinLockView.setPinLength(4);
 
-        mIndicatorDots.setIndicatorType(IndicatorDots.IndicatorType.FILL_WITH_ANIMATION);
+        ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);
 
         logo.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -90,12 +99,19 @@ public class SampleActivity extends AppCompatActivity {
                     mPinLockView.setSwapEnterDeleteButtons(false);
                     mPinLockView.setShowDeleteButton(true);
                     separateDeleteButton.setShowSeparateDeleteButton(false);
+                    mInputField.setVisibility(View.GONE);
+                    mIndicatorDots.setVisibility(View.VISIBLE);
+                    ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.indicator_dots);
                 } else{
                     isEnterButtonEnabled = true;
                     mPinLockView.setShowEnterButton(true);
                     mPinLockView.setSwapEnterDeleteButtons(true);
                     mPinLockView.setShowDeleteButton(false);
                     separateDeleteButton.setShowSeparateDeleteButton(true);
+                    mInputField.setVisibility(View.VISIBLE);
+                    mIndicatorDots.setVisibility(View.GONE);
+                    ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);
+                    mInputField.requestFocus();
                 }
             }
         });

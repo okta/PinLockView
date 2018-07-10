@@ -41,6 +41,7 @@ public class PinLockView extends RecyclerView {
     private int mEnterButtonPressedColor;
 
     private IndicatorDots mIndicatorDots;
+    private InputField mInputField;
     private SeparateDeleteButton mSeparateDeleteButton;
     private PinLockAdapter mAdapter;
     private PinLockListener mPinLockListener;
@@ -56,6 +57,9 @@ public class PinLockView extends RecyclerView {
 
                 if (isIndicatorDotsAttached()) {
                     mIndicatorDots.updateDot(mPin.length());
+                }
+                if (isInputFieldAttached()) {
+                    mInputField.setText(mPin);
                 }
 
                 if (mPin.length() == 1) {
@@ -97,6 +101,9 @@ public class PinLockView extends RecyclerView {
 
                 if (isIndicatorDotsAttached()) {
                     mIndicatorDots.updateDot(mPin.length());
+                }
+                if (isInputFieldAttached()) {
+                    mInputField.setText(mPin);
                 }
 
                 if (mPin.length() == 0) {
@@ -275,6 +282,9 @@ public class PinLockView extends RecyclerView {
 
         if (isIndicatorDotsAttached()) {
             mIndicatorDots.setPinLength(pinLength);
+        }
+        if (isInputFieldAttached()) {
+            mInputField.setText(mPin);
         }
     }
 
@@ -704,6 +714,9 @@ public class PinLockView extends RecyclerView {
         if (mIndicatorDots != null) {
             mIndicatorDots.updateDot(mPin.length());
         }
+        if (mInputField != null) {
+            mInputField.getText().clear();
+        }
         if (mSeparateDeleteButton != null) {
             mSeparateDeleteButton.setVisibility(View.GONE);
         }
@@ -739,5 +752,13 @@ public class PinLockView extends RecyclerView {
         } else {
             this.mSeparateDeleteButton.setVisibility(View.VISIBLE);
         }
+    }
+
+    public boolean isInputFieldAttached() {
+        return mInputField != null;
+    }
+
+    public void attachInputField(InputField mInputField) {
+        this.mInputField = mInputField;
     }
 }

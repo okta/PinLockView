@@ -2,6 +2,7 @@ package com.andrognito.pinlockview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -719,6 +720,8 @@ public class PinLockView extends RecyclerView {
         }
         if (mSeparateDeleteButton != null) {
             mSeparateDeleteButton.setVisibility(View.GONE);
+            mSeparateDeleteButton.setColorFilter(mSeparateDeleteButton.getSeparateDeleteButtonColor(),
+                    PorterDuff.Mode.SRC_ATOP);
         }
     }
 

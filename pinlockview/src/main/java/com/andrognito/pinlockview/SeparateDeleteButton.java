@@ -142,10 +142,5 @@ public class SeparateDeleteButton extends AppCompatImageButton {
 
     public void setShowSeparateDeleteButton(boolean mShowSeparateDeleteButton) {
         this.mShowSeparateDeleteButton = mShowSeparateDeleteButton;
-        if (isShowSeparateDeleteButton()) {
-            this.setVisibility(View.VISIBLE);
-        } else {
-            this.setVisibility(View.GONE);
-        }
     }
 }

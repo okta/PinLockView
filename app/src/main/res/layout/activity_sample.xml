@@ -39,6 +39,8 @@
         android:gravity="center_horizontal"
         android:fontFamily="monospace"
         android:typeface="monospace"
+        android:backgroundTint="@color/light_purple"
+        android:textCursorDrawable="@null"
         android:textSize="27sp"
         android:layout_centerHorizontal="true" />
 
@@ -77,8 +79,6 @@
         app:keypadEnterButtonColor="@color/light_purple"
         app:keypadEnterButtonDisabledColor="@color/white"
         app:keypadEnterButtonPressedColor="@color/greyish"
-        app:separateDeleteButtonColor="@color/colorPrimary"
-        app:separateDeleteButtonPressedColor="@color/colorAccent"
         app:indicatorType="fixed"
         />
 

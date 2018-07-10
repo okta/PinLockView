@@ -143,57 +143,6 @@ public class PinLockView extends RecyclerView {
         }
     };
 
-    private PinLockAdapter.OnDeleteClickListener mOnSeparateDeleteClickListener
-            = new PinLockAdapter.OnDeleteClickListener() {
-        @Override
-        public void onDeleteClicked() {
-            if (mPin.length() > 0) {
-                mPin = mPin.substring(0, mPin.length() - 1);
-
-                if (isIndicatorDotsAttached()) {
-                    mIndicatorDots.updateDot(mPin.length());
-                }
-                if (isInputFieldAttached()) {
-                    mInputField.setText(mPin);
-                }
-
-                if (mPin.length() == 0) {
-                    mAdapter.setPinLength(mPin.length());
-                    mAdapter.notifyItemChanged(mAdapter.getDeleteButtonPosition());
-                    if (mSeparateDeleteButton != null) {
-                        mSeparateDeleteButton.setVisibility(View.GONE);
-                    }
-                }
-
-                if (mPin.length() == mPinLength - 1) {
-                    mAdapter.setPinLength(mPin.length());
-                    mAdapter.notifyItemChanged(mAdapter.getEnterButtonPosition());
-                }
-
-                if (mPinLockListener != null) {
-                    if (mPin.length() == 0) {
-                        mPinLockListener.onEmpty();
-                        clearInternalPin();
-                    } else {
-                        mPinLockListener.onPinChange(mPin.length(), mPin);
-                    }
-                }
-            } else {
-                if (mPinLockListener != null) {
-                    mPinLockListener.onEmpty();
-                }
-            }
-        }
-
-        @Override
-        public void onDeleteLongClicked() {
-            resetPinLockView();
-            if (mPinLockListener != null) {
-                mPinLockListener.onEmpty();
-            }
-        }
-    };
-
     private PinLockAdapter.OnEnterClickListener mOnEnterClickListener
             = new PinLockAdapter.OnEnterClickListener() {
         @Override
@@ -797,7 +746,7 @@ public class PinLockView extends RecyclerView {
 
     public void attachSeparateDeleteButton(SeparateDeleteButton mSeparateDeleteButton) {
         this.mSeparateDeleteButton = mSeparateDeleteButton;
-        this.mSeparateDeleteButton.setOnDeleteClickListener(mOnSeparateDeleteClickListener);
+        this.mSeparateDeleteButton.setOnDeleteClickListener(mOnDeleteClickListener);
         if (mPin.length() == 0) {
             this.mSeparateDeleteButton.setVisibility(View.GONE);
         } else {

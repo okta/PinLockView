@@ -34,7 +34,7 @@ public class SampleActivity extends AppCompatActivity {
         @Override
         public void onComplete(String pin) {
             Log.d(TAG, "Pin complete: " + pin);
-            Toast.makeText(SampleActivity.this, "Pin complete", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SampleActivity.this, "Pin complete: " + pin, Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -71,7 +71,7 @@ public class SampleActivity extends AppCompatActivity {
         ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);
         mInputField.setVisibility(View.VISIBLE);
 
-        mSeparateDeleteButton.setVisibility(View.VISIBLE);
+        mSeparateDeleteButton.setShowSeparateDeleteButton(true);
         mSeparateDeleteButton.setSeparateDeleteButtonColor(R.color.light_purple);
         mSeparateDeleteButton.setSeparateDeleteButtonPressedColor(Color.WHITE);
 

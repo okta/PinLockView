@@ -25,10 +25,10 @@ public class SampleActivity extends AppCompatActivity {
 
     private PinLockView mPinLockView;
     private IndicatorDots mIndicatorDots;
-    private ImageView logo;
     private InputField mInputField;
+    private SeparateDeleteButton mSeparateDeleteButton;
+    private ImageView logo;
     private boolean isEnterButtonEnabled = true;
-    private SeparateDeleteButton separateDeleteButton;
 
     private PinLockListener mPinLockListener = new PinLockListener() {
         @Override
@@ -59,20 +59,21 @@ public class SampleActivity extends AppCompatActivity {
         mPinLockView = (PinLockView) findViewById(R.id.pin_lock_view);
         mInputField = (InputField) findViewById(R.id.input_field);
         mIndicatorDots = (IndicatorDots) findViewById(R.id.indicator_dots);
-        separateDeleteButton = (SeparateDeleteButton) findViewById(R.id.separate_delete_button);
-
-        mPinLockView.setPinLockListener(mPinLockListener);
-        mPinLockView.setPinLength(4);
-        mPinLockView.setShowDeleteButton(false);
-        ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);
+        mSeparateDeleteButton = (SeparateDeleteButton) findViewById(R.id.separate_delete_button);
 
         mPinLockView.attachInputField(mInputField);
+        mPinLockView.attachIndicatorDots(mIndicatorDots);
+        mPinLockView.attachSeparateDeleteButton(mSeparateDeleteButton);
+
+        mPinLockView.setPinLockListener(mPinLockListener);
+        mPinLockView.setPinLength(6);
+        mPinLockView.setShowDeleteButton(false);
+        ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);
         mInputField.setVisibility(View.VISIBLE);
 
-        separateDeleteButton.setVisibility(View.VISIBLE);
-        separateDeleteButton.setSeparateDeleteButtonColor(R.color.light_purple);
-        separateDeleteButton.setSeparateDeleteButtonPressedColor(Color.WHITE);
-        mPinLockView.attachSeparateDeleteButton(separateDeleteButton);
+        mSeparateDeleteButton.setVisibility(View.VISIBLE);
+        mSeparateDeleteButton.setSeparateDeleteButtonColor(R.color.light_purple);
+        mSeparateDeleteButton.setSeparateDeleteButtonPressedColor(Color.WHITE);
 
         mPinLockView.attachIndicatorDots(mIndicatorDots);
         mIndicatorDots.setVisibility(View.GONE);
@@ -85,7 +86,7 @@ public class SampleActivity extends AppCompatActivity {
                     mPinLockView.setShowEnterButton(false);
                     mPinLockView.setSwapEnterDeleteButtons(false);
                     mPinLockView.setShowDeleteButton(true);
-                    separateDeleteButton.setShowSeparateDeleteButton(false);
+                    mSeparateDeleteButton.setShowSeparateDeleteButton(false);
                     mInputField.setVisibility(View.GONE);
                     mIndicatorDots.setVisibility(View.VISIBLE);
                     ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.indicator_dots);
@@ -95,7 +96,7 @@ public class SampleActivity extends AppCompatActivity {
                     mPinLockView.setShowEnterButton(true);
                     mPinLockView.setSwapEnterDeleteButtons(true);
                     mPinLockView.setShowDeleteButton(false);
-                    separateDeleteButton.setShowSeparateDeleteButton(true);
+                    mSeparateDeleteButton.setShowSeparateDeleteButton(true);
                     mInputField.setVisibility(View.VISIBLE);
                     mIndicatorDots.setVisibility(View.GONE);
                     ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);

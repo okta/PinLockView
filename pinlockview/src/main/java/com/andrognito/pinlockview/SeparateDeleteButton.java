@@ -58,8 +58,6 @@ public class SeparateDeleteButton extends AppCompatImageButton {
         this.setScaleType(ScaleType.FIT_CENTER);
         this.setColorFilter(getSeparateDeleteButtonColor(), PorterDuff.Mode.SRC_ATOP);
 
-
-
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

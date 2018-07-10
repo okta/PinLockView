@@ -89,6 +89,7 @@ public class SampleActivity extends AppCompatActivity {
                     mInputField.setVisibility(View.GONE);
                     mIndicatorDots.setVisibility(View.VISIBLE);
                     ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.indicator_dots);
+                    mPinLockView.resetPinLockView();
                 } else{
                     isEnterButtonEnabled = true;
                     mPinLockView.setShowEnterButton(true);
@@ -99,6 +100,7 @@ public class SampleActivity extends AppCompatActivity {
                     mIndicatorDots.setVisibility(View.GONE);
                     ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);
                     mInputField.requestFocus();
+                    mPinLockView.resetPinLockView();
                 }
             }
         });

@@ -224,12 +224,20 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 // Set Enable of Enter Button
                 if (mPinLength >= mCustomizationOptionsBundle.getPinLength()) {
                     holder.mEnterButton.setEnabled(true);
-                    holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
-                            PorterDuff.Mode.SRC_ATOP);
+                    if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
+                        holder.mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonEnabledDrawableId());
+                    } else {
+                        holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                                PorterDuff.Mode.SRC_ATOP);
+                    }
                 } else {
                     holder.mEnterButton.setEnabled(false);
-                    holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonDisabledColor(),
-                            PorterDuff.Mode.SRC_ATOP);
+                    if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
+                        holder.mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonDisabledDrawableId());
+                    } else {
+                        holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonDisabledColor(),
+                                PorterDuff.Mode.SRC_ATOP);
+                    }
                 }
 
                 // Set Visibility of Enter Button
@@ -450,17 +458,29 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonPressesColor(),
-                                PorterDuff.Mode.SRC_ATOP);
+                        if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
+                            mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonDisabledDrawableId());
+                        } else {
+                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonPressesColor(),
+                                    PorterDuff.Mode.SRC_ATOP);
+                        }
                         rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
                     }
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
-                                PorterDuff.Mode.SRC_ATOP);
+                        if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
+                            mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonEnabledDrawableId());
+                        } else {
+                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                                    PorterDuff.Mode.SRC_ATOP);
+                        }
                     }
                     if (leftButtonArea(v, event)) {
-                        mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
-                                PorterDuff.Mode.SRC_ATOP);
+                        if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
+                            mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonEnabledDrawableId());
+                        } else {
+                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                                    PorterDuff.Mode.SRC_ATOP);
+                        }
                     }
                     return false;
                 }

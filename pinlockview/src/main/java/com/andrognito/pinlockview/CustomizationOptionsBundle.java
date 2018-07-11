@@ -2,6 +2,7 @@ package com.andrognito.pinlockview;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntDef;
+import android.widget.ImageView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -39,6 +40,9 @@ public class CustomizationOptionsBundle {
     private int enterButtonColor;
     private int enterButtonDisabledColor;
     private int enterButtonPressesColor;
+    private boolean useCustomEnterButtomImages;
+    private int enterButtonEnabledDrawableId;
+    private int enterButtonDisabledDrawableId;
 
     public CustomizationOptionsBundle() {
     }
@@ -234,5 +238,29 @@ public class CustomizationOptionsBundle {
 
     public void setSwapEnterDeleteButtons(boolean swapEnterDeleteButtons) {
         this.swapEnterDeleteButtons = swapEnterDeleteButtons;
+    }
+
+    public boolean isUseCustomEnterButtonImages() {
+        return useCustomEnterButtomImages;
+    }
+
+    public void setUseCustomEnterButtonImages(boolean useCustomEnterButtomImages) {
+        this.useCustomEnterButtomImages = useCustomEnterButtomImages;
+    }
+
+    public int getEnterButtonEnabledDrawableId() {
+        return enterButtonEnabledDrawableId;
+    }
+
+    public void setEnterButtonEnabledDrawableId(int enterButtonEnabledDrawableId) {
+        this.enterButtonEnabledDrawableId = enterButtonEnabledDrawableId;
+    }
+
+    public int getEnterButtonDisabledDrawableId() {
+        return enterButtonDisabledDrawableId;
+    }
+
+    public void setEnterButtonDisabledDrawableId(int enterButtonDisabledDrawableId) {
+        this.enterButtonDisabledDrawableId = enterButtonDisabledDrawableId;
     }
 }

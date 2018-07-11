@@ -41,6 +41,10 @@ public class PinLockView extends RecyclerView {
     private int mEnterButtonDisabledColor;
     private int mEnterButtonPressedColor;
 
+    private boolean mUseCustomEnterButtonImages;
+    private int mEnterButtonEnabledDrawableId;
+    private int mEnterButtonDisabledDrawableId;
+
     private IndicatorDots mIndicatorDots;
     private InputField mInputField;
     private SeparateDeleteButton mSeparateDeleteButton;
@@ -716,7 +720,7 @@ public class PinLockView extends RecyclerView {
             mIndicatorDots.updateDot(mPin.length());
         }
         if (mInputField != null) {
-            mInputField.getText().clear();
+            mInputField.setText("");
         }
         if (mSeparateDeleteButton != null) {
             mSeparateDeleteButton.setVisibility(View.GONE);
@@ -743,6 +747,10 @@ public class PinLockView extends RecyclerView {
         this.mIndicatorDots = mIndicatorDots;
     }
 
+    public void detachIndicatorDots() {
+        this.mIndicatorDots = null;
+    }
+
     /**
      * Returns true if {@link SeparateDeleteButton} is attached to {@link PinLockView}
      *
@@ -767,6 +775,10 @@ public class PinLockView extends RecyclerView {
         }
     }
 
+    public void detachSeparateDeleteButton() {
+        this.mSeparateDeleteButton = null;
+    }
+
     /**
      * Returns true if {@link InputField} is attached to {@link PinLockView}
      *
@@ -783,5 +795,27 @@ public class PinLockView extends RecyclerView {
      */
     public void attachInputField(InputField inputField) {
         this.mInputField = inputField;
+    }
+
+    public void detachInputField() {
+        this.mInputField = null;
+    }
+
+    public void setUseCustomEnterButtonImages(boolean useCustomEnterButtonImages) {
+        this.mUseCustomEnterButtonImages = useCustomEnterButtonImages;
+        mCustomizationOptionsBundle.setUseCustomEnterButtonImages(useCustomEnterButtonImages);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void setEnterButtonEnabledDrawableId(int id) {
+        this.mEnterButtonEnabledDrawableId = id;
+        mCustomizationOptionsBundle.setEnterButtonEnabledDrawableId(id);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void setEnterButtonDisabledDrawableId(int id) {
+        this.mEnterButtonEnabledDrawableId = id;
+        mCustomizationOptionsBundle.setEnterButtonDisabledDrawableId(id);
+        mAdapter.notifyDataSetChanged();
     }
 }

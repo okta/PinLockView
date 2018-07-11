@@ -5,13 +5,16 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class InputField extends AppCompatEditText {
 
@@ -36,15 +39,18 @@ public class InputField extends AppCompatEditText {
     private void initView(Context context) {
         ViewCompat.setLayoutDirection(this, ViewCompat.LAYOUT_DIRECTION_LTR);
 
-        initView(context);
+        disableKeyboard(context);
+        setupPasswordDots();
     }
 
     private void disableKeyboard(Context context) {
         setCursorVisible(true);
         ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        setShowSoftInputOnFocus(false);
         setInputType(InputType.TYPE_NULL);
         setKeyListener(null);
         setRawInputType(InputType.TYPE_CLASS_TEXT);
+        setCursorVisible(true);
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,8 +60,22 @@ public class InputField extends AppCompatEditText {
         setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return true;
                 /* do nothing */
+                return true;
+            }
+        });
+        setOnKeyListener(new OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                /* do nothing */
+                return true;
+            }
+        });
+        setOnEditorActionListener(new OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                /* do nothing */
+                return true;
             }
         });
     }

@@ -191,6 +191,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private void configureDeleteButtonHolder(DeleteViewHolder holder) {
         if (holder != null) {
             if (mCustomizationOptionsBundle.isShowDeleteButton() && mPinLength > 0) {
+                holder.mDeleteButton.setEnabled(true);
                 holder.mDeleteButton.setVisibility(View.VISIBLE);
                 if (mCustomizationOptionsBundle.getDeleteButtonDrawable() != null) {
                     holder.mButtonImage.setImageDrawable(mCustomizationOptionsBundle.getDeleteButtonDrawable());
@@ -207,6 +208,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         mCustomizationOptionsBundle.getButtonSize());
                 holder.mDeleteButton.setLayoutParams(params);
             } else {
+                holder.mDeleteButton.setEnabled(false);
                 holder.mDeleteButton.setVisibility(View.GONE);
             }
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -235,6 +237,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     holder.mEnterButton.setVisibility(View.VISIBLE);
                 }
             } else {
+                holder.mEnterButton.setEnabled(false);
                 holder.mEnterButton.setVisibility(View.GONE);
             }
 
@@ -371,9 +374,6 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mDeleteButton.getVisibility() == View.GONE) {
-                        return;
-                    }
                     if (mOnDeleteClickListener != null) {
                         mOnDeleteClickListener.onDeleteClicked();
                     }
@@ -383,9 +383,6 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mDeleteButton.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (mDeleteButton.getVisibility() == View.GONE) {
-                        return true;
-                    }
                     if (mOnDeleteClickListener != null) {
                         mOnDeleteClickListener.onDeleteLongClicked();
                     }
@@ -398,9 +395,6 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    if (mDeleteButton.getVisibility() == View.GONE) {
-                        return false;
-                    }
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         mButtonImage.setColorFilter(mCustomizationOptionsBundle
                                 .getDeleteButtonPressesColor());
@@ -444,9 +438,6 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mEnterButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mEnterButton.getVisibility() == View.GONE) {
-                        return;
-                    }
                     if (mOnEnterClickListener != null) {
                         mOnEnterClickListener.onEnterClicked();
                     }
@@ -458,9 +449,6 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    if (mEnterButton.getVisibility() == View.GONE) {
-                        return false;
-                    }
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonPressesColor(),
                                 PorterDuff.Mode.SRC_ATOP);

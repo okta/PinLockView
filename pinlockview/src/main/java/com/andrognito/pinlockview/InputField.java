@@ -36,18 +36,18 @@ public class InputField extends AppCompatEditText {
     }
 
     private void disableKeyboard(Context context) {
-        this.setCursorVisible(true);
+        setCursorVisible(true);
         ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        this.setInputType(InputType.TYPE_NULL);
-        this.setKeyListener(null);
-        this.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        this.setOnClickListener(new OnClickListener() {
+        setInputType(InputType.TYPE_NULL);
+        setKeyListener(null);
+        setRawInputType(InputType.TYPE_CLASS_TEXT);
+        setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 /* do nothing */
             }
         });
-        this.setOnTouchListener(new OnTouchListener() {
+        setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
@@ -57,7 +57,6 @@ public class InputField extends AppCompatEditText {
     }
 
     private void setupPasswordDots() {
-        final InputField inputField = this;
         TextWatcher pinWatcher = new TextWatcher() {
 
             private Handler pinHandler = new Handler();
@@ -83,8 +82,8 @@ public class InputField extends AppCompatEditText {
                     @Override
                     public void run() {
                         editing = true;
-                        inputField.setText(hideString(inputField.getText().toString()));
-                        inputField.setSelection(inputField.getText().length());
+                        InputField.this.setText(hideString(InputField.this.getText().toString()));
+                        InputField.this.setSelection(InputField.this.getText().length());
                         editing = false;
                     }
                 };
@@ -93,8 +92,8 @@ public class InputField extends AppCompatEditText {
                     oldLength = s.length();
 
                     editing = true;
-                    inputField.setText(almostHideString(inputField.getText().toString()));
-                    inputField.setSelection(inputField.getText().length());
+                    InputField.this.setText(almostHideString(InputField.this.getText().toString()));
+                    InputField.this.setSelection(InputField.this.getText().length());
                     editing = false;
 
                     pinHandler.postDelayed(hideText, 1500);
@@ -110,7 +109,7 @@ public class InputField extends AppCompatEditText {
         this.addTextChangedListener(pinWatcher);
     }
 
-    public String almostHideString(String s) {
+    private String almostHideString(String s) {
         if (s == null || s.isEmpty()) {
             return "";
         }
@@ -124,7 +123,7 @@ public class InputField extends AppCompatEditText {
         return stringBuilder.toString();
     }
 
-    public String hideString(String s) {
+    private String hideString(String s) {
         if (s == null || s.isEmpty()) {
             return "";
         }

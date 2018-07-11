@@ -53,12 +53,12 @@ public class SeparateDeleteButton extends AppCompatImageButton {
 
         ViewCompat.setLayoutDirection(this, ViewCompat.LAYOUT_DIRECTION_LTR);
 
-        this.setImageResource(R.drawable.ic_backspace);
-        this.setBackgroundColor(Color.TRANSPARENT);
-        this.setScaleType(ScaleType.FIT_CENTER);
-        this.setColorFilter(getSeparateDeleteButtonColor(), PorterDuff.Mode.SRC_ATOP);
+        setImageResource(R.drawable.ic_backspace);
+        setBackgroundColor(Color.TRANSPARENT);
+        setScaleType(ScaleType.FIT_CENTER);
+        setColorFilter(getSeparateDeleteButtonColor(), PorterDuff.Mode.SRC_ATOP);
 
-        this.setOnClickListener(new OnClickListener() {
+        setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (SeparateDeleteButton.this.getVisibility() == View.GONE) {
@@ -70,7 +70,7 @@ public class SeparateDeleteButton extends AppCompatImageButton {
             }
         });
 
-        this.setOnLongClickListener(new OnLongClickListener() {
+        setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 if (SeparateDeleteButton.this.getVisibility() == View.GONE) {
@@ -83,7 +83,7 @@ public class SeparateDeleteButton extends AppCompatImageButton {
             }
         });
 
-        this.setOnTouchListener(new OnTouchListener() {
+        setOnTouchListener(new OnTouchListener() {
             private Rect rect;
 
             @Override
@@ -125,7 +125,7 @@ public class SeparateDeleteButton extends AppCompatImageButton {
 
     public void setSeparateDeleteButtonColor(int mSeparateDeleteButtonColor) {
         this.mSeparateDeleteButtonColor = mSeparateDeleteButtonColor;
-        this.setColorFilter(getSeparateDeleteButtonColor(), PorterDuff.Mode.SRC_ATOP);
+        setColorFilter(getSeparateDeleteButtonColor(), PorterDuff.Mode.SRC_ATOP);
     }
 
     public int getSeparateDeleteButtonPressedColor() {

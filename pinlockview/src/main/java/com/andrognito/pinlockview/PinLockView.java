@@ -743,12 +743,22 @@ public class PinLockView extends RecyclerView {
         this.mIndicatorDots = mIndicatorDots;
     }
 
+    /**
+     * Returns true if {@link SeparateDeleteButton} is attached to {@link PinLockView}
+     *
+     * @return true if attached, false otherwise
+     */
     public boolean isSeparateDeleteButtonAttached() {
         return mSeparateDeleteButton != null;
     }
 
-    public void attachSeparateDeleteButton(SeparateDeleteButton mSeparateDeleteButton) {
-        this.mSeparateDeleteButton = mSeparateDeleteButton;
+    /**
+     * Attaches {@link SeparateDeleteButton} to {@link PinLockView}
+     *
+     * @param separateDeleteButton the SeparateDeleteButton to attach
+     */
+    public void attachSeparateDeleteButton(SeparateDeleteButton separateDeleteButton) {
+        this.mSeparateDeleteButton = separateDeleteButton;
         this.mSeparateDeleteButton.setOnDeleteClickListener(mOnDeleteClickListener);
         if (mPin.length() == 0) {
             this.mSeparateDeleteButton.setVisibility(View.GONE);
@@ -757,11 +767,21 @@ public class PinLockView extends RecyclerView {
         }
     }
 
+    /**
+     * Returns true if {@link InputField} is attached to {@link PinLockView}
+     *
+     * @return true if attached, false otherwise
+     */
     public boolean isInputFieldAttached() {
         return mInputField != null;
     }
 
-    public void attachInputField(InputField mInputField) {
-        this.mInputField = mInputField;
+    /**
+     * Attaches {@link InputField} to {@link PinLockView}
+     *
+     * @param inputField the InputField to attach
+     */
+    public void attachInputField(InputField inputField) {
+        this.mInputField = inputField;
     }
 }

@@ -3,6 +3,7 @@ package com.andrognito.pinlockview;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.InputType;
@@ -17,22 +18,25 @@ public class InputField extends AppCompatEditText {
     public InputField(Context context) {
         super(context);
 
-        disableKeyboard(context);
-        setupPasswordDots();
+        initView(context);
     }
 
     public InputField(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        disableKeyboard(context);
-        setupPasswordDots();
+        initView(context);
     }
 
     public InputField(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        disableKeyboard(context);
-        setupPasswordDots();
+        initView(context);
+    }
+
+    private void initView(Context context) {
+        ViewCompat.setLayoutDirection(this, ViewCompat.LAYOUT_DIRECTION_LTR);
+
+        initView(context);
     }
 
     private void disableKeyboard(Context context) {

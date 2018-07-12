@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;

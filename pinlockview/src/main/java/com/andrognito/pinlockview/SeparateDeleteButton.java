@@ -9,13 +9,8 @@ import android.graphics.Rect;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 @SuppressLint("ClickableViewAccessibility")
 public class SeparateDeleteButton extends AppCompatImageButton {

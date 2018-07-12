@@ -1,11 +1,6 @@
 package com.andrognito.pinlockview;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IntDef;
-import android.widget.ImageView;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
 /**
  * The customization options for the buttons in {@link PinLockView}

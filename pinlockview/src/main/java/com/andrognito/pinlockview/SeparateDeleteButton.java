@@ -61,9 +61,6 @@ public class SeparateDeleteButton extends AppCompatImageButton {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (SeparateDeleteButton.this.getVisibility() == View.GONE) {
-                    return;
-                }
                 if (mOnDeleteClickListener != null) {
                     mOnDeleteClickListener.onDeleteClicked();
                 }
@@ -73,9 +70,6 @@ public class SeparateDeleteButton extends AppCompatImageButton {
         setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if (SeparateDeleteButton.this.getVisibility() == View.GONE) {
-                    return true;
-                }
                 if (mOnDeleteClickListener != null) {
                     mOnDeleteClickListener.onDeleteLongClicked();
                 }
@@ -88,9 +82,6 @@ public class SeparateDeleteButton extends AppCompatImageButton {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (SeparateDeleteButton.this.getVisibility() == View.GONE) {
-                    return false;
-                }
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     SeparateDeleteButton.this.setColorFilter(
                             getSeparateDeleteButtonPressedColor(), PorterDuff.Mode.SRC_ATOP);

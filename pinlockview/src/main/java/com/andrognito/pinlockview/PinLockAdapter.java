@@ -226,18 +226,16 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     holder.mEnterButton.setEnabled(true);
                     if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
                         holder.mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonEnabledDrawableId());
-                    } else {
-                        holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
-                                PorterDuff.Mode.SRC_ATOP);
                     }
+                    holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                            PorterDuff.Mode.SRC_ATOP);
                 } else {
                     holder.mEnterButton.setEnabled(false);
                     if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
                         holder.mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonDisabledDrawableId());
-                    } else {
-                        holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonDisabledColor(),
-                                PorterDuff.Mode.SRC_ATOP);
                     }
+                    holder.mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonDisabledColor(),
+                            PorterDuff.Mode.SRC_ATOP);
                 }
 
                 // Set Visibility of Enter Button
@@ -460,27 +458,24 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
                             mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonPressedDrawableId());
-                        } else {
-                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonPressesColor(),
-                                    PorterDuff.Mode.SRC_ATOP);
                         }
+                        mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonPressesColor(),
+                                PorterDuff.Mode.SRC_ATOP);
                         rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
                     }
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
                             mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonEnabledDrawableId());
-                        } else {
-                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
-                                    PorterDuff.Mode.SRC_ATOP);
                         }
+                        mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                                PorterDuff.Mode.SRC_ATOP);
                     }
                     if (leftButtonArea(v, event)) {
                         if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
                             mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonEnabledDrawableId());
-                        } else {
-                            mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
-                                    PorterDuff.Mode.SRC_ATOP);
                         }
+                        mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonColor(),
+                                PorterDuff.Mode.SRC_ATOP);
                     }
                     return false;
                 }

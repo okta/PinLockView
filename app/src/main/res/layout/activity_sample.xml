@@ -76,8 +76,8 @@
         app:keypadDeleteButtonPressedColor="@color/white"
         app:keypadShowEnterButton="true"
         app:keypadSwapEnterDeleteButtons="true"
-        app:keypadEnterButtonColor="@color/light_purple"
-        app:keypadEnterButtonDisabledColor="@color/white"
+        app:keypadEnterButtonColor="@android:color/transparent"
+        app:keypadEnterButtonDisabledColor="@android:color/transparent"
         app:keypadEnterButtonPressedColor="@color/greyish"
         app:indicatorType="fixed"
         />

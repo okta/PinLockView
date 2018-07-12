@@ -70,15 +70,18 @@ public class SampleActivity extends AppCompatActivity {
         mPinLockView.setShowDeleteButton(false);
         ((RelativeLayout.LayoutParams) mPinLockView.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.input_field);
         mInputField.setVisibility(View.VISIBLE);
+        mInputField.requestFocus();
 
         mSeparateDeleteButton.setShowSeparateDeleteButton(true);
         mSeparateDeleteButton.setSeparateDeleteButtonColor(Color.TRANSPARENT);
         mSeparateDeleteButton.setSeparateDeleteButtonPressedColor(Color.GRAY);
-        mSeparateDeleteButton.setImageResource(R.drawable.ic_cheveron_left);
+        mSeparateDeleteButton.setImageResource(R.drawable.ic_keyboard_backspace);
 
         mPinLockView.setUseCustomEnterButtonImages(true);
         mPinLockView.setEnterButtonEnabledDrawableId(R.drawable.ic_check_box);
         mPinLockView.setEnterButtonDisabledDrawableId(R.drawable.ic_check_box_outline);
+        mPinLockView.setEnterButtonPressedDrawableId(R.drawable.ic_check_box);
+        mPinLockView.setDeleteButtonDrawable(getResources().getDrawable(R.drawable.ic_cheveron_left));
 
         mPinLockView.detachIndicatorDots();
         mIndicatorDots.setVisibility(View.GONE);

@@ -459,7 +459,7 @@ public class PinLockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (mCustomizationOptionsBundle.isUseCustomEnterButtonImages()) {
-                            mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonDisabledDrawableId());
+                            mEnterButton.setImageResource(mCustomizationOptionsBundle.getEnterButtonPressedDrawableId());
                         } else {
                             mEnterButton.setColorFilter(mCustomizationOptionsBundle.getEnterButtonPressesColor(),
                                     PorterDuff.Mode.SRC_ATOP);

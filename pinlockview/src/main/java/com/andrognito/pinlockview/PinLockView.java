@@ -818,4 +818,10 @@ public class PinLockView extends RecyclerView {
         mCustomizationOptionsBundle.setEnterButtonDisabledDrawableId(id);
         mAdapter.notifyDataSetChanged();
     }
+
+    public void setEnterButtonPressedDrawableId(int id) {
+        this.mEnterButtonEnabledDrawableId = id;
+        mCustomizationOptionsBundle.setEnterButtonPressedDrawableId(id);
+        mAdapter.notifyDataSetChanged();
+    }
 }

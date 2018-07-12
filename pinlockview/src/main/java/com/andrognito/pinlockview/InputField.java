@@ -45,12 +45,12 @@ public class InputField extends AppCompatEditText {
 
     private void disableKeyboard(Context context) {
         setCursorVisible(true);
-        ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setShowSoftInputOnFocus(false);
+        setTextIsSelectable(true);
         setInputType(InputType.TYPE_NULL);
         setKeyListener(null);
         setRawInputType(InputType.TYPE_CLASS_TEXT);
-        setCursorVisible(true);
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +78,21 @@ public class InputField extends AppCompatEditText {
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return true;
+    }
+
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        return true;
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        return true;
     }
 
     private void setupPasswordDots() {

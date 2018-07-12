@@ -43,6 +43,8 @@ public class CustomizationOptionsBundle {
     private boolean useCustomEnterButtomImages;
     private int enterButtonEnabledDrawableId;
     private int enterButtonDisabledDrawableId;
+    private int enterButtonPressedDrawableId;
+
 
     public CustomizationOptionsBundle() {
     }
@@ -262,5 +264,13 @@ public class CustomizationOptionsBundle {
 
     public void setEnterButtonDisabledDrawableId(int enterButtonDisabledDrawableId) {
         this.enterButtonDisabledDrawableId = enterButtonDisabledDrawableId;
+    }
+
+    public int getEnterButtonPressedDrawableId() {
+        return enterButtonPressedDrawableId;
+    }
+
+    public void setEnterButtonPressedDrawableId(int enterButtonPressedDrawableId) {
+        this.enterButtonPressedDrawableId = enterButtonPressedDrawableId;
     }
 }

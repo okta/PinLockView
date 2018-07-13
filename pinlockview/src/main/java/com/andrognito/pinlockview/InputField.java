@@ -44,7 +44,7 @@ public class InputField extends AppCompatEditText {
 
     private void disableKeyboard(Context context) {
         setCursorVisible(true);
-        ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setShowSoftInputOnFocus(false);
         setTextIsSelectable(true);
         setInputType(InputType.TYPE_NULL);

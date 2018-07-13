@@ -1,7 +1,8 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PinLockView-green.svg?style=true)](https://android-arsenal.com/details/1/3706)
-
 # PinLockView
 A clean, minimalistic, easy-to-use and highly customizable pin lock custom view for Android.
+
+### Specs
+[ ![Download](https://api.bintray.com/packages/aritraroy/maven/pin-lock-view/images/download.svg) ](https://bintray.com/aritraroy/maven/pin-lock-view/_latestVersion) [![API](https://img.shields.io/badge/API-11%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=11) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PinLockView-green.svg?style=true)](https://android-arsenal.com/details/1/3706)
 
 ![PinLockView](https://github.com/aritraroy/PinLockView/blob/master/screens/logo.png)
 
@@ -20,7 +21,7 @@ This library is available in **jCenter** which is the default Maven repository u
 dependencies {
     // other dependencies here
     
-    compile 'com.andrognito.pinlockview:pinlockview:1.0.1'
+    implementation 'com.andrognito.pinlockview:pinlockview:2.1.0'
 }
 ```
 
@@ -30,7 +31,7 @@ dependencies {
 <dependency>
   <groupId>com.andrognito.pinlockview</groupId>
   <artifactId>pinlockview</artifactId>
-  <version>1.0.1</version>
+  <version>2.1.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -112,9 +113,12 @@ You **MUST** attach it to the PinLockView, otherwise it will be simply ignored.
 There are several theming options available through XML attributes which you can use to completely change the look-and-feel of this view to match the theme of your app.
 
 ```xml
+
+  // In <com.andrognito.pinlockview.PinLockView></>
+  
   app:pinLength="6"                                       // Change the pin length
-  app:keypadTextColor="#E6E6E6"                           // Change the color of the keypad text
-  app:keypadTextSize="16dp"                               // Change the text size in the keypad
+  app:keypadTextColor="#E6E6E6"                           // Change the color of the keypad text and numbers
+  app:keypadTextSize="16dp"                               // Change the text and numbers size in the keypad
   app:keypadButtonSize="72dp"                             // Change the size of individual keys/buttons
   app:keypadVerticalSpacing="24dp"                        // Alters the vertical spacing between the keypad buttons
   app:keypadHorizontalSpacing="36dp"                      // Alters the horizontal spacing between the keypad buttons
@@ -124,25 +128,50 @@ There are several theming options available through XML attributes which you can
   app:keypadShowDeleteButton="false"                      // Should show the delete button, default is true
   app:keypadDeleteButtonPressedColor="#C8C8C8"            // Change the pressed/focused state color of the delete button
   
+  // New properties for <com.andrognito.pinlockview.PinLockView></>, added for Okta
+  // Purpose is to add letters under numbers, along with some other small configurations
+  
+  app:keypadUseDeprecatedColorOptions                     // Set to true if you’d like to use keypadTextColor and keypadTextSize, otherwise it will use the new settings
+  app:keypadNumbersTextColor="#C8C8C8"                    // Sets the color of the numbers
+  app:keypadNumbersTextSize                               // Sets the font size of the numbers
+  app:keypadLettersTextColor="#C8C8C8"                    // Sets the color of the letters
+  app:keypadLettersTextSize                               // Sets the font size of the letters
+  app:keypadDeleteButtonColor="#C8C8C8"                   // Sets the color of the delete button
+  app:keypadShowLetters="true"                            // Changes visibility of the letters
+  app:keypadNumbersBold="true"                            // Sets the boldness of number text
+  app:keypadLettersBold="false"                           // Sets the boldness of letter text
+  app:keypadDefaultDeleteColor="false"                    // Set to false if you want a differently coloured delete button
+  
+  
+  // In <com.andrognito.pinlockview.IndicatorDots></>
+  
   app:dotEmptyBackground="@drawable/empty"                // Customize the empty state of the dots
   app:dotFilledBackground"@drawable/filled"               // Customize the filled state of the dots
   app:dotDiameter="12dp"                                  // Change the diameter of the dots
   app:dotSpacing="16dp"                                   // Change the spacing between individual dots
+  app:indicatorType="fillWithAnimation"                   // Choose between "fixed", "fill" and "fillWithAnimation"
 ```
-
-# Author
-
-**Aritra Roy** - aritra.roy.in@gmail.com
-**Play Store** - <a href="https://play.google.com/store/apps/details?id=com.codexapps.andrognito">Andrognito</a>
 
 # Contribution
 
 This library is quite exhaustive and offers a lot of customization options. If you find a bug or would like to improve any aspect of it, feel free to contribute with pull requests.
 
+# About The Author
+
+### Aritra Roy
+
+Android & Backend Developer. Blogger. Designer. Fitness Enthusiast.
+
+<a href="https://play.google.com/store/apps/details?id=com.codexapps.andrognito&hl=en" target="_blank"><img src="https://github.com/aritraroy/social-icons/blob/master/play-store-icon.png?raw=true" width="60"></a> <a href="https://blog.aritraroy.in/" target="_blank"><img src="https://github.com/aritraroy/social-icons/blob/master/medium-icon.png?raw=true" width="60"></a>
+<a href="http://stackoverflow.com/users/2858654/aritra-roy" target="_blank"><img src="https://github.com/aritraroy/social-icons/blob/master/stackoverflow-icon.png?raw=true" width="60"></a>
+<a href="https://twitter.com/aritraroy" target="_blank"><img src="https://github.com/aritraroy/social-icons/blob/master/twitter-icon.png?raw=true" width="60"></a>
+<a href="http://linkedin.com/in/aritra-roy"><img src="https://github.com/aritraroy/social-icons/blob/master/linkedin-icon.png?raw=true" width="60"></a>
+
+
 # License
 
 ```
-Copyright 2014 aritraroy
+Copyright 2017 aritraroy
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
